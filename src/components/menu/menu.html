@@ -1,0 +1,21 @@
+<ion-menu [content]="content">
+  <ion-content>
+      <ion-list>
+        <ion-list-header>Desafios</ion-list-header>
+        <ion-item 
+          *ngFor="let desafio of pagesDesafio; let i = index"
+          (click)="navigateDesafio(desafio.id)"
+          menuClose 
+          detail-none
+        >{{ i + '. ' + desafio.title }}</ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-list-header>Atividades</ion-list-header>
+        <ion-item 
+          *ngFor="let atividade of pagesAtividade; let i = index" 
+          (click)="navigateAtividade(atividade.id)"
+          menuClose 
+          detail-none>{{ i + '. ' + atividade.title }}</ion-item>
+      </ion-list>
+  </ion-content>
+</ion-menu>

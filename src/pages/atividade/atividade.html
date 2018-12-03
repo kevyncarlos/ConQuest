@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Atividade</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<menu [content]="content"></menu>
+
+<ion-content #content padding>
+  <ion-card>
+    <ion-card-title text-center>
+      Atividade
+    </ion-card-title>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <b>Título: </b>Lorem ipsum, dolor sit amet
+          </ion-col>
+          <ion-col col-12 text-justify>
+            <b>Descrição: </b>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Aut optio veritatis asperiores ex illum dolores sit quas
+            rem voluptatibus nam adipisci fugit error, placeat
+            ratione perspiciatis harum, ut, distinctio magni!
+          </ion-col>
+          <ion-col col-12>
+            <b>Tempo restante: </b> 00:00hs
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h4>Resolução: </h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-item no-padding>
+          <ion-label floating>Texto*</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12>
+        <ion-item no-padding>
+          <ion-label>
+            Imagens
+          </ion-label>
+          <ion-input type="file"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <button ion-button block>
+          Confirmar
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

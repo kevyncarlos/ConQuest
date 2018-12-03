@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PagesModule } from '../pages/pages.module';
+import { ComponentsModule } from '../components/components.module';
 
 registerLocaleData(localePt);
 
@@ -20,7 +21,10 @@ registerLocaleData(localePt);
   imports: [
     BrowserModule,
     PagesModule,
-    IonicModule.forRoot(MyApp)
+    ComponentsModule,
+    IonicModule.forRoot(MyApp, {
+      menuType: 'overlay',
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

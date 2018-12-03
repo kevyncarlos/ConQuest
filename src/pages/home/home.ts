@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { QuestionarioPage } from '../questionario/questionario';
-import { storage_keys } from '../../config/global';
 
 @Component({
   selector: 'page-home',

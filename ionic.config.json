@@ -1,5 +1,7 @@
 {
   "name": "ConQuest",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
