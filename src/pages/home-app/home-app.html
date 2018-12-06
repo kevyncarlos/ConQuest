@@ -12,4 +12,12 @@
 
 <ion-content #content padding>
 
+  <ion-item>
+    <ion-label floating>Id de pesquisa</ion-label>
+    <ion-input [(ngModel)]="id" type="number"></ion-input>
+  </ion-item>
+
+  <button ion-button (click)="get()">Get</button>
+  <button ion-button (click)="insert()">insert</button>
+  <button ion-button (click)="getAll()">GetAll</button>
 </ion-content>

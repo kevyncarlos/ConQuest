@@ -8,4 +8,4 @@ export class Task {
     type: number;    
 }
 
-let types: string[] = [ "Desafio", "Atividade" ];
+export const types: string[] = [ "Desafio", "Atividade" ];

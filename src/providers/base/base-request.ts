@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Page } from '../../models/page';
 import { base_url, path_version_api } from '../../config/global';
 
-export abstract class BaseProvider<T> {
+export abstract class BaseRequestProvider<T> {
 
   constructor(
     public http: HttpClient

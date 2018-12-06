@@ -1,4 +1,4 @@
-export class Usuario {
+export class User {
     id: number;
     date: Date = new Date();
     name?: string;
@@ -7,4 +7,4 @@ export class Usuario {
     finished: boolean = false;
 }
 
-let sexs: string[] = [ "Masculino", "Feminino" ];
+export const sexs: string[] = [ "Masculino", "Feminino" ];
