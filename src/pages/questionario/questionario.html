@@ -20,22 +20,22 @@
       <ion-col col-12>
         <ion-item no-padding>
           <ion-label floating>Nome</ion-label>
-          <ion-input [(ngModel)]="dadosPessoais.nome"></ion-input>
+          <ion-input [(ngModel)]="dadosPessoais.name"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12>
         <ion-item no-padding>
           <ion-label floating>Data de Nascimento</ion-label>
-          <ion-datetime [(ngModel)]="dadosPessoais.dtNasc" displayFormat="DD/MM/YYYY"></ion-datetime>
+          <ion-datetime [(ngModel)]="dadosPessoais.date_birth" displayFormat="DD/MM/YYYY"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col col-12>
         <ion-item no-padding>
           <ion-label floating>Sexo</ion-label>
-          <ion-select [(ngModel)]="dadosPessoais.sexo">
-            <ion-option value="m">Masculino</ion-option>
-            <ion-option value="f">Feminino</ion-option>
-            <ion-option value="nd">Não declarado</ion-option>
+          <ion-select [(ngModel)]="dadosPessoais.sex">
+            <ion-option value="0">Masculino</ion-option>
+            <ion-option value="1">Feminino</ion-option>
+            <ion-option value="">Não declarado</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>

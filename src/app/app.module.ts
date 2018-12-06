@@ -13,6 +13,11 @@ import { PagesModule } from '../pages/pages.module';
 import { ComponentsModule } from '../components/components.module';
 import { DatabaseProvider } from '../providers/database/database';
 import { UserModelProvider } from '../providers/user-model/user-model';
+import { CategoryModelProvider } from '../providers/category-model/category-model';
+import { UserCategoryModelProvider } from '../providers/user-category-model/user-category-model';
+import { AnswerModelProvider } from '../providers/answer-model/answer-model';
+import { TaskModelProvider } from '../providers/task-model/task-model';
+import { UserTaskModelProvider } from '../providers/user-task-model/user-task-model';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -40,7 +45,12 @@ registerLocaleData(localePt);
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     SQLite,
     DatabaseProvider,
-    UserModelProvider
+    UserModelProvider,
+    CategoryModelProvider,
+    UserCategoryModelProvider,
+    AnswerModelProvider,
+    TaskModelProvider,
+    UserTaskModelProvider
   ]
 })
 export class AppModule {}

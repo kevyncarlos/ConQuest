@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { storage_keys } from '../../config/global';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomeAppPage } from '../home-app/home-app';
+import { UserModelProvider } from '../../providers/user-model/user-model';
+import { User } from '../../models/user';
+import { Category } from '../../models/category';
+import { CategoryModelProvider } from '../../providers/category-model/category-model';
+import { UserCategoryModelProvider } from '../../providers/user-category-model/user-category-model';
 
 @IonicPage()
 @Component({
@@ -12,69 +16,60 @@ export class QuestionarioPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private userProvider: UserModelProvider,
+    private categoryProvider: CategoryModelProvider,
+    private userCategoryProvider: UserCategoryModelProvider,
+    private alertCtrl: AlertController
   ) { }
 
   public isDadosPessoais: boolean = false;
-  public dadosPessoais: any = {
-    nome: null as string,
-    dtNasc: null as Date,
-    sexo: null as string
+  public dadosPessoais: User;
+  public categories: Category[];
+  public questoes: Questao[];
+
+  ionViewDidLoad(){
+    this.categoryProvider.getAll()
+    .then(cats => this.categories = cats.ToArray());
+
+    this.categories.forEach(element => {
+      this.questoes.push({
+        id: element.id,
+        nome: element.description,
+        value: false
+      })
+    });
   }
 
-  public questoes: any[] = [
-    {
-      nome: 'Opção 1',
-      value: false
-    }, {
-      nome: 'Opção 2',
-      value: false
-    }, {
-      nome: 'Opção 3',
-      value: false
-    }, {
-      nome: 'Opção 4',
-      value: false
-    }, {
-      nome: 'Opção 5',
-      value: false
-    }, {
-      nome: 'Opção 6',
-      value: false
-    }, {
-      nome: 'Opção 7',
-      value: false
-    }, {
-      nome: 'Opção 8',
-      value: false
-    }, {
-      nome: 'Opção 9',
-      value: false
-    }, {
-      nome: 'Opção 10',
-      value: false
-    }, {
-      nome: 'Opção 11',
-      value: false
-    }, {
-      nome: 'Opção 12',
-      value: false
-    }, {
-      nome: 'Opção 13',
-      value: false
-    }, {
-      nome: 'Opção 14',
-      value: false
-    }, {
-      nome: 'Opção 15',
-      value: false
-    }, {
-      nome: 'Opção 16',
-      value: false
-    }
-  ]
   public enviar() {
-    localStorage.setItem(storage_keys.terms, 'true');
-    this.navCtrl.push(HomeAppPage);
+    let flag: boolean;
+
+    this.userProvider.create(this.dadosPessoais)
+      .then((user) => flag = true);
+
+    this.questoes.forEach(element => {
+      if(element.value){
+        this.userCategoryProvider.create({
+          id: 0,
+          user_id: this.dadosPessoais.id,
+          category_id: element.id
+        });
+      }
+    });
+
+    if(flag){
+      this.navCtrl.push(HomeAppPage);
+    }else{
+      this.alertCtrl.create({
+        title: "Erro",
+        message: "Falha ao registrar dados do questionário! Por favor reinicie o aplicativo ConQuest."
+      }).present();
+    }
   }
+}
+
+class Questao {
+  id: number;
+  nome: string;
+  value: boolean;
 }

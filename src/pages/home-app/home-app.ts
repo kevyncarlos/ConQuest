@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserModelProvider } from '../../providers/user-model/user-model';
+import { UserTaskModelProvider } from '../../providers/user-task-model/user-task-model';
+import { User_Task } from '../../models/user_task';
 
 @IonicPage()
 @Component({
@@ -11,31 +12,30 @@ export class HomeAppPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private userProvider: UserModelProvider
+    private userTaskProvider: UserTaskModelProvider
   ) { }
 
-  public id: number = 1;
+  public items: any[] = [];
+  public userTask: User_Task[];
+  itemExpandHeight: number = 100;
 
-  public get() {
-    let user = this.userProvider.get(this.id)
-    user.then(user => {
-      console.log(user)
-    })
+  ionViewDidLoad(){
+    this.userTaskProvider.getAll()
+    .then(ut => this.userTask = ut.Where(c => c.finished).ToArray());
+
+    this.userTask.forEach(element => {
+      this.items.push({expanded: false})
+    });
   }
 
-  public getAll() {
-    let users = this.userProvider.getAll()
-    users.then((users) => {
-      console.log(users)
-    })
-  }
-
-  public insert() {
-    this.userProvider.create({
-      id: 0,
-      name: "adsfasdf",
-      date: (new Date()),
-      finished: false
-    })
+  expandItem(item){
+    this.items.map((listItem) => {
+        if(item == listItem){
+            listItem.expanded = !listItem.expanded;
+        } else {
+            listItem.expanded = false;
+        }
+        return listItem;
+    });
   }
 }

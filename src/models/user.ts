@@ -4,7 +4,7 @@ export class User {
     name?: string;
     date_birth?: Date;
     sex?: number;
-    finished: boolean = false;
+    finished?: boolean = false;
 }
 
 export const sexs: string[] = [ "Masculino", "Feminino" ];

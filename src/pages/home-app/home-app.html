@@ -4,20 +4,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>home-app</ion-title>
+    <ion-title>Atividades Recentes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <menu [content]="content"></menu>
 
 <ion-content #content padding>
+  <ion-list>
+    <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items; let i = index">
+      <h3>{{ i }}</h3>
+    </button>
+    <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded">
+        Tarefa: {{ userTask[i].user_id }}
+        Data: {{ userTask[i].date_ref }}
+    </expandable>
+    <button ion-button clear item-end>Ver</button>
+  </ion-list>
 
-  <ion-item>
-    <ion-label floating>Id de pesquisa</ion-label>
-    <ion-input [(ngModel)]="id" type="number"></ion-input>
-  </ion-item>
-
-  <button ion-button (click)="get()">Get</button>
-  <button ion-button (click)="insert()">insert</button>
-  <button ion-button (click)="getAll()">GetAll</button>
 </ion-content>

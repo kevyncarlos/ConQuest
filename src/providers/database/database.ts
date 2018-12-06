@@ -35,8 +35,8 @@ export class DatabaseProvider {
       "CREATE TABLE IF NOT EXISTS category(id integer primary key AUTOINCREMENT, description text)",
       "CREATE TABLE IF NOT EXISTS task(id integer primary key AUTOINCREMENT, description text, category_id integer, duration text, type integer)",
       "CREATE TABLE IF NOT EXISTS user_category(id integer primary key AUTOINCREMENT, user_id integer, category_id integer)",
-      "CREATE TABLE IF NOT EXISTS user_category(id integer primary key AUTOINCREMENT, user_id integer, task_id integer, date_ref text, finished integer)",
-      "CREATE TABLE IF NOT EXISTS user(id integer primary key AUTOINCREMENT, date text, name text, date_birth text, sex integer, finished, number)"
+      "CREATE TABLE IF NOT EXISTS user_task(id integer primary key AUTOINCREMENT, user_id integer, task_id integer, date_ref text, finished integer)",
+      "CREATE TABLE IF NOT EXISTS user(id integer primary key AUTOINCREMENT, date text, name text, date_birth text, sex integer, finished integer)"
     ])
       .then(() => console.log('Tabelas criadas'))
       .catch(e => console.error('Erro ao criar as tabelas', e));
