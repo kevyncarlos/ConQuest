@@ -20,8 +20,8 @@ export class MenuComponent {
 
   constructor(
     private navCtrl: NavController,
-    private userTaskProvider: UserTaskModelProvider,
-    private taskProvider: TaskModelProvider
+    // private userTaskProvider: UserTaskModelProvider,
+    // private taskProvider: TaskModelProvider
   ) { }
 
   ionViewDidLoad(){
@@ -29,13 +29,13 @@ export class MenuComponent {
     let desafios: List<Task>;
     let atividades: List<Task>;
 
-    this.userTaskProvider.getAll()
-      .then(ut => user_tasks = ut.Where(c => !c.finished));
+    // this.userTaskProvider.getAll()
+    //   .then(ut => user_tasks = ut.Where(c => !c.finished && c.date_ref.toDateString() == new Date().toDateString()));
 
     let tasks: List<Task>;
 
-    this.taskProvider.getAll()
-      .then(t => tasks = t.Where(c => user_tasks.Select(c => c.id).Contains(c.id)));
+    // this.taskProvider.getAll()
+    //   .then(t => tasks = t.Where(c => user_tasks.Select(c => c.id).Contains(c.id)));
     
     desafios = tasks.Where(c => c.type == 0);
     atividades = tasks.Where(c => c.type == 1);

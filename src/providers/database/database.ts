@@ -42,22 +42,40 @@ export class DatabaseProvider {
       .catch(e => console.error('Erro ao criar as tabelas', e));
   }
   private cargaInicial(db: SQLiteObject) {
-  //   db.executeSql('select COUNT(id) as qtd from categories', [{}])
-  //   .then((data: any) => {
-  //     //Se não existe nenhum registro
-  //     if (data.rows.item(0).qtd == 0) {
- 
-  //       // Criando as tabelas
-  //       db.sqlBatch([
-  //         ['insert into categories (name) values (?)', ['Hambúrgueres']],
-  //         ['insert into categories (name) values (?)', ['Bebidas']],
-  //         ['insert into categories (name) values (?)', ['Sobremesas']]
-  //       ])
-  //         .then(() => console.log('Dados padrões incluídos'))
-  //         .catch(e => console.error('Erro ao incluir dados padrões', e));
- 
-  //     }
-  //   })
-  //   .catch(e => console.error('Erro ao consultar a qtd de categorias', e));
+    db.executeSql('select COUNT(id) as qtd from category', [{}])
+      .then((data: any) => {
+        if(data.rows.item(0).qtd == 0){
+          db.sqlBatch([
+            ['insert into category (description) values (?)', ['Ler livros']],
+            ['insert into category (description) values (?)', ['Fotografar']],
+            ['insert into category (description) values (?)', ['Desenhar']],
+            ['insert into category (description) values (?)', ['Dançar']],
+            ['insert into category (description) values (?)', ['Tomar sorvete']]
+          ])
+            .then(() => console.log('Categorias inseridas.'))
+            .catch(e => console.error('Erro ao inserir categorias.', e));
+        }
+      }).catch(e => console.error('Erro ao consultar a qtd de categorias', e));
+
+      db.executeSql('select COUNT(id) as qtd from task', [{}])
+      .then((data: any) => {
+        if(data.rows.item(0).qtd == 0){
+          db.sqlBatch([
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Vá a uma biblioteca e procure algo que goste para ler.', 1, '23:59:59', 0]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Me conte dois trechos de algum livro que você goste.', 1, '08:00:00', 1]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Leia para alguém que não sabe ou não consegue ler.', 1, '14:00:00', 1]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Fotografe uma borboleta encima de uma flor e aproveite para se divertir procurando.', 2, '23:59:59', 0]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Tire fotos de algum membro da sua familia. O pet também conta.', 2, '14:00:00', 1]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Se encontre com um amigo ou uma pessoa muito importante pra você e faça um desenho dela.', 3, '23:59:59', 0]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Imagine a coisa mais louca e divertida possível e desenhe isso, dê vida no papel.', 3, '14:00:00', 1]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Chame alguns amigos ou conhecidos para dançar contigo.', 4, '23:59:59', 0]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Dance uma música que te inspira e me conte como foi a experiência.', 4, '14:00:00', 1]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Organize uma sorvetada com a sua família.', 5, '23:59:59', 0]],
+            ['insert into task (description, category_id, duration, type) values (?, ?, ?, ?)', ['Saia para tomar um sorvete e convide alguém se quiser.', 5, '14:00:00', 1]]
+          ])
+            .then(() => console.log('Tarefas inseridas.'))
+            .catch(e => console.error('Erro ao inserir tarefas.', e));
+        }
+      }).catch(e => console.error('Erro ao consultar a qtd de tarefas', e));
   }
 }

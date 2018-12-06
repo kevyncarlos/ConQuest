@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomeAppPage } from '../home-app/home-app';
-import { UserModelProvider } from '../../providers/user-model/user-model';
+// import { UserModelProvider } from '../../providers/user-model/user-model';
 import { User } from '../../models/user';
 import { Category } from '../../models/category';
-import { CategoryModelProvider } from '../../providers/category-model/category-model';
-import { UserCategoryModelProvider } from '../../providers/user-category-model/user-category-model';
+// import { CategoryModelProvider } from '../../providers/category-model/category-model';
+// import { UserCategoryModelProvider } from '../../providers/user-category-model/user-category-model';
+import { Data } from '../../config/data';
 
 @IonicPage()
 @Component({
@@ -17,9 +18,9 @@ export class QuestionarioPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private userProvider: UserModelProvider,
-    private categoryProvider: CategoryModelProvider,
-    private userCategoryProvider: UserCategoryModelProvider,
+    // private userProvider: UserModelProvider,
+    // private categoryProvider: CategoryModelProvider,
+    // private userCategoryProvider: UserCategoryModelProvider,
     private alertCtrl: AlertController
   ) { }
 
@@ -29,8 +30,10 @@ export class QuestionarioPage {
   public questoes: Questao[];
 
   ionViewDidLoad(){
-    this.categoryProvider.getAll()
-    .then(cats => this.categories = cats.ToArray());
+    // this.categoryProvider.getAll()
+    // .then(cats => this.categories = cats.ToArray());
+
+    this.categories = Data.Categories;
 
     this.categories.forEach(element => {
       this.questoes.push({
@@ -42,20 +45,32 @@ export class QuestionarioPage {
   }
 
   public enviar() {
-    let flag: boolean;
+    let flag: boolean = true;
 
-    this.userProvider.create(this.dadosPessoais)
-      .then((user) => flag = true);
+    Data.Users.push(this.dadosPessoais);
+
+    // this.userProvider.create(this.dadosPessoais)
+    //   .then((user) => flag = true);
 
     this.questoes.forEach(element => {
       if(element.value){
-        this.userCategoryProvider.create({
+        Data.Users_Categories.push({
           id: 0,
-          user_id: this.dadosPessoais.id,
+          user_id: Data.Users.sort(c => c.id).reverse()[0].id,
           category_id: element.id
         });
       }
     });
+
+    // this.questoes.forEach(element => {
+    //   if(element.value){
+    //     this.userCategoryProvider.create({
+    //       id: 0,
+    //       user_id: this.dadosPessoais.id,
+    //       category_id: element.id
+    //     });
+    //   }
+    // });
 
     if(flag){
       this.navCtrl.push(HomeAppPage);

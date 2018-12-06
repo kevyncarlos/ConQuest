@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserTaskModelProvider } from '../../providers/user-task-model/user-task-model';
+// import { UserTaskModelProvider } from '../../providers/user-task-model/user-task-model';
 import { User_Task } from '../../models/user_task';
+import { Data } from '../../config/data';
 
 @IonicPage()
 @Component({
@@ -11,8 +12,8 @@ import { User_Task } from '../../models/user_task';
 export class HomeAppPage {
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    private userTaskProvider: UserTaskModelProvider
+    public navParams: NavParams
+    // private userTaskProvider: UserTaskModelProvider
   ) { }
 
   public items: any[] = [];
@@ -20,10 +21,11 @@ export class HomeAppPage {
   itemExpandHeight: number = 100;
 
   ionViewDidLoad(){
-    this.userTaskProvider.getAll()
-    .then(ut => this.userTask = ut.Where(c => c.finished).ToArray());
+    // this.userTaskProvider.getAll()
+    // .then(ut => this.userTask = ut.Where(c => c.finished).ToArray());
+    this.userTask = Data.Users_Tasks.filter(c => c.finished)
 
-    this.userTask.forEach(element => {
+    this.userTask.forEach(() => {
       this.items.push({expanded: false})
     });
   }

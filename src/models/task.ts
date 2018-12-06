@@ -4,7 +4,7 @@ export class Task {
     id: number;
     category_id: number;
     description: string;
-    duration: Time;
+    duration: string;
     type: number;    
 }
 
